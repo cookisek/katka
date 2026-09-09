@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rezervácia termínu | Profesionálna nemčina</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary: #0f172a;
+            --accent: #72f4cb;
+            --accent-glow: rgba(114, 244, 203, 0.4);
+            --bg-light: #f8fafc;
+            --text-main: #334155;
+            --white: #ffffff;
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: cinematicFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes cinematicFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Hlavný rezervačný box */
+        .reservation-container {
+            width: 100%;
+            max-width: 600px;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reservation-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--accent);
+        }
+
+        /* Stav pre neoprávnený prístup (chyba) */
+        #error-state {
+            text-align: center;
+            display: none;
+        }
+
+        #error-state h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        #error-state p {
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        /* Stav rezervácie (obsah) */
+        #booking-state {
+            display: none;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title h1 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title h1 span {
+            color: #0d9488;
+        }
+
+        .section-title p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.9rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1rem;
+            color: var(--text-main);
+            background: var(--bg-light);
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #0d9488;
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+        }
+
+        .btn-submit {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            width: 100%;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 14px var(--accent-glow);
+            margin-top: 1rem;
+        }
+
+        .btn-submit:hover {
+            background: #5eead4;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px var(--accent-glow);
+        }
+
+        /* Úspešné potvrdenie po odoslaní */
+        #success-state {
+            text-align: center;
+            display: none;
+        }
+
+        #success-state h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        #success-state p {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        .success-icon {
+            font-size: 3rem;
+            color: #0d9488;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .reservation-container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="reservation-container">
+        
+        <!-- 1. CHYBOVÝ STAV (Token kontrola) -->
+        <div id="error-state">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🔒</div>
+            <h2>Prístup odopretý</h2>
+            <p>Táto stránka je prístupná výhradne cez špeciálny odkaz, ktorý vám bol zaslaný v potvrdzovacom e-maile.</p>
+            <a href="index.html" class="btn-submit" style="display: inline-block; text-align: center;">Prejsť na hlavnú stránku</a>
+        </div>
+
+        <!-- 2. REZERVAČNÝ FORMULÁR -->
+        <div id="booking-state">
+            <div class="section-title">
+                <h1>Vyberte si <span>termín</span></h1>
+                <p>Zvoľte dátum, čas a vyplňte vaše kontaktné údaje.</p>
+            </div>
+            
+            <!-- Formulár odosiela dáta cez Web3Forms priamo na tvoj e-mail -->
+            <form action="https://api.web3forms.com/submit" method="POST" id="reservation-form">
+                
+                <!-- TU SI VLOŽÍŠ SVOJ ACCESS KEY Z WEB3FORMS (Návod nižšie) -->
+                <input type="hidden" name="apikey" value="b98b93ab-8cf2-4536-b6f0-fd58e53c16c4">
+                
+                <!-- Skrytý predmet e-mailu, ktorý ti príde -->
+                <input type="hidden" name="subject" value="Nová rezervácia termínu od klienta!">
+
+                <div class="form-group">
+                    <label for="name">Vaše meno</label>
+                    <input type="text" id="name" name="Meno" required placeholder="Zadajte vaše meno">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mailová adresa</label>
+                    <input type="email" id="email" name="Email" required placeholder="vas.email@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Telefónne číslo</label>
+                    <input type="tel" id="phone" name="Telefon" required placeholder="+421 900 123 456">
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Dátum stretnutia</label>
+                    <input type="date" id="date" name="Datum" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="time">Čas stretnutia</label>
+                    <select id="time" name="Cas" required>
+                        <option value="">-- Vyberte čas --</option>
+                        <option value="10:00 - 11:00">10:00 - 11:00</option>
+                        <option value="11:30 - 12:30">11:30 - 12:30</option>
+                        <option value="14:00 - 15:00">14:00 - 15:00</option>
+                        <option value="15:30 - 16:30">15:30 - 16:30</option>
+                        <option value="17:00 - 18:00">17:00 - 18:00</option>
+                    </select>
+                </div>
+
+                <!-- Voliteľné: Presmerovanie na stránku úspechu po odoslaní -->
+                <!-- <input type="hidden" name="redirect" value="https://tvoja-stranka.sk/dakujem.html"> -->
+
+                <button type="submit" class="btn-submit">Potvrdiť rezerváciu</button>
+            </form>
+        </div>
+
+        <!-- 3. ÚSPEŠNÉ POTVRDENIE (Zobrazí sa po odoslaní, ak nepoužívaš externé presmerovanie) -->
+        <div id="success-state">
+            <div class="success-icon">✓</div>
+            <h2>Termín úspešne rezervovaný!</h2>
+            <p>Ďakujem, váš termín bol zaznamenaný a údaje mi boli odoslané. Čoskoro vám pošlem detailné informácie o stretnutí.</p>
+            <a href="index.html" class="btn-submit" style="display: inline-block; text-align: center;">Späť na úvod</a>
+        </div>
+
+    </div>
+
+    <script>
+        // Overenie tokenu v URL adrese (napr. rezervacia.html?token=katarina2026)
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token');
+            const validToken = "katarina2026"; // Môžeš si kedykoľvek zmeniť
+
+            if (token === validToken) {
+                document.getElementById('booking-state').style.display = 'block';
+            } else {
+                document.getElementById('error-state').style.display = 'block';
+            }
+
+            // Nastavenie minimálneho dátumu na dnešok, aby sa nedali vyberať minulé dni
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').min = today;
+        });
+
+        // Zachytenie odoslania formulára, skrytie formulára a zobrazenie úspešnej hlášky
+        const form = document.getElementById('reservation-form');
+        form.addEventListener('submit', function(e) {
+            // Ak chceš vidieť, ako prebehne odoslanie, Web3Forms pošle dáta a presmeruje/zobrazí správu.
+            // Tento blok zabezpečí plynulý prechod na stav úspechu:
+            setTimeout(() => {
+                document.getElementById('booking-state').style.display = 'none';
+                document.getElementById('success-state').style.display = 'block';
+            }, 500);
+        });
+    </script>
+</body>
+</html>

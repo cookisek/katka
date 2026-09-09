@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O mne | Profesionálna nemčina</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary: #0f172a;
+            --accent: #72f4cb;
+            --accent-glow: rgba(114, 244, 203, 0.4);
+            --bg-light: #f8fafc;
+            --text-main: #334155;
+            --white: #ffffff;
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: cinematicFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes cinematicFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Navigácia so skleneným efektom */
+        header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .logo span {
+            color: #0d9488;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a:not(.btn-nav)::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #0d9488;
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        .nav-links a:not(.btn-nav):hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #0d9488;
+        }
+
+        .btn-nav {
+            background: var(--primary);
+            color: var(--white) !important;
+            padding: 0.6rem 1.4rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+        }
+
+        .btn-nav:hover {
+            background: var(--accent);
+            color: var(--primary) !important;
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 20px var(--accent-glow);
+        }
+
+        /* O mne sekcia */
+        .about-section {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            height: 440px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f1f5f9;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .about-content h1 {
+            font-size: 3rem;
+            color: var(--primary);
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .about-content h1 span {
+            color: #0d9488;
+        }
+
+        .about-content p {
+            font-size: 1.05rem;
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            display: inline-block;
+            transition: var(--transition);
+            box-shadow: 0 4px 14px var(--accent-glow);
+            margin-top: 1rem;
+        }
+
+        .btn-primary:hover {
+            background: #5eead4;
+            color: var(--primary);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 30px var(--accent-glow);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .about-section {
+                grid-template-columns: 1fr;
+                padding: 3rem 1rem;
+                text-align: center;
+            }
+            .about-content h1 {
+                font-size: 2.3rem;
+            }
+            .about-image {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Katarína Pischel<span>.</span></a>
+            <div class="nav-right">
+                <nav class="nav-links">
+                    <a href="index.html">Domov</a>
+                    <a href="index.html#sluzby">Služby</a>
+                    <a href="o-mne.html" class="active">O mne</a>
+                    <a href="cennik.html">Cenník</a>
+                    <a href="kontakt.html" class="btn-nav">Kontakt</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="about-section">
+        <div class="about-image">
+            <img src="ucitelka.jpg" alt="Katarína Pischel">
+        </div>
+        <div class="about-content">
+            <h1>O mne & moji <span>prístup</span></h1>
+            <p>Volám sa <strong>Katarína Pischel</strong> a nemčina je pre mňa nielen jazykom, ale aj vášňou, ktorú s radosťou posúvam ďalej. Mám dlhoročné skúsenosti s výučbou, konverzačnými kurzami, odbornými prekladmi i tlmočením.</p>
+            <p>Moím cieľom je vytvoriť uvoľnenú a priateľskú atmosféru, v ktorej odbúrate strach z rozprávania a rýchlo dosiahnete svoje osobné či kariérne ciele.</p>
+            <a href="kontakt.html" class="btn-primary">Napíšte mi správu</a>
+        </div>
+    </section>
+
+</body>
+</html>

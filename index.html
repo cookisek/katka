@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profesionálna nemčina | Preklady & Doučovanie</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary: #0f172a;
+            --accent: #72f4cb;
+            --accent-glow: rgba(114, 244, 203, 0.4);
+            --bg-light: #f8fafc;
+            --text-main: #334155;
+            --white: #ffffff;
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: cinematicFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes cinematicFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Navigácia so skleneným efektom */
+        header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .logo span {
+            color: #0d9488;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a:not(.btn-nav)::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #0d9488;
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        .nav-links a:not(.btn-nav):hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #0d9488;
+        }
+
+        .btn-nav {
+            background: var(--primary);
+            color: var(--white) !important;
+            padding: 0.6rem 1.4rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+        }
+
+        .btn-nav:hover {
+            background: var(--accent);
+            color: var(--primary) !important;
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 20px var(--accent-glow);
+        }
+
+        /* Hero sekcia */
+        .hero {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            animation: heroSlideUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+        }
+
+        @keyframes heroSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            color: var(--primary);
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero-content h1 span {
+            color: #0d9488;
+            position: relative;
+            display: inline-block;
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); text-shadow: 0 0 20px rgba(114, 244, 203, 0.5); }
+        }
+
+        .hero-content p {
+            font-size: 1.125rem;
+            margin-bottom: 2.5rem;
+            color: #64748b;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: var(--transition);
+            box-shadow: 0 4px 14px var(--accent-glow);
+        }
+
+        .btn-primary:hover {
+            background: #5eead4;
+            color: var(--primary);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 30px var(--accent-glow);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid #cbd5e1;
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
+        }
+
+        /* Fotka v hero sekcii */
+        .hero-image {
+            height: 440px;
+            border-radius: 20px;
+            animation: heroImageFloat 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both, floatSlow 6s ease-in-out infinite 1.5s;
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f1f5f9;
+            transition: var(--transition);
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            transition: var(--transition);
+        }
+
+        .hero-image:hover {
+            box-shadow: 0 30px 60px -20px rgba(114, 244, 203, 0.3);
+        }
+
+        .hero-image:hover img {
+            transform: scale(1.04);
+        }
+
+        @keyframes heroImageFloat {
+            from {
+                opacity: 0;
+                transform: translateX(40px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+
+        /* Služby – vycentrované rozloženie */
+        .services {
+            background: var(--white);
+            padding: 7rem 2rem;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title p {
+            color: #64748b;
+            font-size: 1.05rem;
+        }
+
+        .services-grid {
+            max-width: 1150px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            justify-content: center;
+            gap: 2.5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .service-card {
+            background: var(--bg-light);
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .service-card.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: transparent;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-12px) scale(1.01);
+            box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.12);
+            border-color: #cbd5e1;
+            background: var(--white);
+        }
+
+        .service-card:hover::before {
+            background: var(--accent);
+        }
+
+        .card-content-top {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card ul {
+            margin-bottom: 2rem;
+            display: inline-block;
+            text-align: left;
+            width: 100%;
+            padding-left: 0.5rem;
+        }
+
+        .service-card ul li {
+            padding: 0.4rem 0;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            position: relative;
+            padding-left: 1.4rem;
+        }
+
+        .service-card ul li::before {
+            content: "•";
+            color: #0d9488;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: 1px;
+        }
+
+        .card-btn {
+            margin-top: auto;
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+            padding: 0.75rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 3rem 1rem;
+                text-align: center;
+            }
+            .hero-content h1 {
+                font-size: 2.4rem;
+            }
+            .hero-buttons {
+                justify-content: center;
+                flex-direction: column;
+            }
+            .hero-image {
+                display: none;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="domov"></div>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Katarína Pischel<span>.</span></a>
+            <div class="nav-right">
+                <nav class="nav-links">
+                    <a href="index.html" class="active">Domov</a>
+                    <a href="index.html#sluzby">Služby</a>
+                    <a href="o-mne.html">O mne</a>
+                    <a href="cennik.html">Cenník</a>
+                    <a href="kontakt.html" class="btn-nav">Kontakt</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Profesionálna nemčina pre <span>firmy aj jednotlivcov</span></h1>
+            <p>Ponúkam <strong>odborné preklady a tlmočenie</strong> z/do nemčiny, <strong>individuálne doučovanie</strong> a <strong>konverzačné kurzy</strong> šité na mieru pre študentov, dospelých aj firemných klientov s dôrazom na plynulú komunikáciu.</p>
+            <div class="hero-buttons">
+                <a href="kontakt.html" class="btn-primary">Mám záujem o doučovanie</a>
+                <a href="#sluzby" class="btn-secondary">Zistiť viac</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="ucitelka.jpg" alt="Učiteľka nemčiny">
+        </div>
+    </section>
+
+    <section class="services" id="sluzby">
+        <div class="section-title">
+            <h2>Moje služby</h2>
+            <p>Komplexné jazykové riešenia s dôrazom na kvalitu a diskrétnosť</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="card-content-top">
+                    <h3>Doučovanie</h3>
+                    <p>Jazykové kurzy prispôsobené vašim cieľom – od prípravy na maturitu či certifikáty až po gramatiku.</p>
+                    <ul>
+                        <li>Pre začiatočníkov aj pokročilých</li>
+                        <li>Online formou alebo prezenčne</li>
+                        <li>Flexibilný časový harmonogram</li>
+                    </ul>
+                </div>
+                <a href="kontakt.html" class="btn-secondary card-btn">Objednať hodinu</a>
+            </div>
+
+            <div class="service-card">
+                <div class="card-content-top">
+                    <h3>Konverzačné kurzy</h3>
+                    <p>Intenzívne rozprávanie zamerané na odbúranie strachu z hovorenia a získanie prirodzenej sebaistoty.</p>
+                    <ul>
+                        <li>Reálne životné situácie a témy</li>
+                        <li>Okamžitá korekcia chýb a výslovnosti</li>
+                        <li>Podnetné a uvoľnené prostredie</li>
+                    </ul>
+                </div>
+                <a href="kontakt.html" class="btn-secondary card-btn">Začať konverzovať</a>
+            </div>
+
+            <div class="service-card">
+                <div class="card-content-top">
+                    <h3>Preklady</h3>
+                    <p>Presné a štýlovo čisté preklady dokumentácie, zmlúv, korešpondencie a textov pre osobné či firemné účely.</p>
+                    <ul>
+                        <li>Všeobecná a obchodná nemčina</li>
+                        <li>Rýchle dodacie lehoty</li>
+                        <li>Diskrétnosť a profesionalita</li>
+                    </ul>
+                </div>
+                <a href="kontakt.html" class="btn-secondary card-btn">Dohodnúť preklad</a>
+            </div>
+
+            <div class="service-card">
+                <div class="card-content-top">
+                    <h3>Tlmočenie</h3>
+                    <p>Profesionálne sprevádzanie a tlmočenie pre firmy a jednotlivcov pri rokovaniach, stretnutiach či eventoch.</p>
+                    <ul>
+                        <li>Obchodné rokovania a schôdzky</li>
+                        <li>Sprievod pre klientov</li>
+                        <li>Spoľahlivosť a diskrétność</li>
+                    </ul>
+                </div>
+                <a href="kontakt.html" class="btn-secondary card-btn">Dohodnúť tlmočenie</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const cards = document.querySelectorAll(".service-card");
+            
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("reveal");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            cards.forEach(card => observer.observe(card));
+        });
+    </script>
+</body>
+</html>

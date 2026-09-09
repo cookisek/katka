@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt | Profesionálna nemčina</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary: #0f172a;
+            --accent: #72f4cb;
+            --accent-glow: rgba(114, 244, 203, 0.4);
+            --bg-light: #f8fafc;
+            --text-main: #334155;
+            --white: #ffffff;
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: cinematicFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes cinematicFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Navigácia so skleneným efektom */
+        header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .logo span {
+            color: #0d9488;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a:not(.btn-nav)::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #0d9488;
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        .nav-links a:not(.btn-nav):hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #0d9488;
+        }
+
+        .btn-nav {
+            background: var(--primary);
+            color: var(--white) !important;
+            padding: 0.6rem 1.4rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+        }
+
+        .btn-nav:hover {
+            background: var(--accent);
+            color: var(--primary) !important;
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 20px var(--accent-glow);
+        }
+
+        /* Kontakt sekcia */
+        .contact-section {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h1 {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            letter-spacing: -1px;
+        }
+
+        .section-title h1 span {
+            color: #0d9488;
+        }
+
+        .section-title p {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+
+        /* Grid pre kontaktné info a formulár vedľa seba */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+
+        /* Kontajner s kontaktnými údajmi */
+        .contact-info {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.05);
+        }
+
+        .contact-info h3 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+        }
+
+        .contact-info p {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-icon {
+            background: #f1f5f9;
+            color: #0d9488;
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+
+        .contact-item:hover .contact-icon {
+            background: var(--accent);
+            color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .contact-details span {
+            display: block;
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-details a, .contact-details p {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.05rem;
+            transition: var(--transition);
+        }
+
+        .contact-details a:hover {
+            color: #0d9488;
+        }
+
+        /* Formulár */
+        .contact-form {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.9rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1rem;
+            color: var(--text-main);
+            background: var(--bg-light);
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #0d9488;
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            height: 150px;
+        }
+
+        .btn-submit {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            width: 100%;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 14px var(--accent-glow);
+        }
+
+        .btn-submit:hover {
+            background: #5eead4;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px var(--accent-glow);
+        }
+
+        /* Správa po úspešnom odoslaní */
+        #form-success {
+            display: none;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        #form-success h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        #form-success p {
+            color: #64748b;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .contact-form, .contact-info {
+                padding: 1.5rem;
+            }
+            .section-title h1 {
+                font-size: 2.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Katarína Pischel<span>.</span></a>
+            <div class="nav-right">
+                <nav class="nav-links">
+                    <a href="index.html">Domov</a>
+                    <a href="index.html#sluzby">Služby</a>
+                    <a href="o-mne.html">O mne</a>
+                    <a href="cennik.html">Cenník</a>
+                    <a href="kontakt.html" class="btn-nav active">Kontakt</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="contact-section">
+        <div class="section-title">
+            <h1>Máte záujem o spoluprácu? <span>Napíšte mi</span></h1>
+            <p>Vyplňte formulár nižšie alebo ma kontaktujte priamo cez údaje na boku.</p>
+        </div>
+
+        <div class="contact-grid">
+            <!-- Kontaktné informácie na boku -->
+            <div class="contact-info">
+                <h3>Kontaktné údaje</h3>
+                <p>Neváhajte ma kontaktovať telefonicky, e-mailom alebo prostredníctvom kontaktného formulára.</p>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-details">
+                        <span>Telefónne číslo</span>
+                        <a href="tel:+421900123456">+421 900 123 456</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div class="contact-details">
+                        <span>E-mailová adresa</span>
+                        <a href="mailto:info@katarinapischel.sk">info@katarinapischel.sk</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulár prepojený s Web3Forms -->
+            <form action="https://api.web3forms.com/submit" method="POST" class="contact-form" id="contact-form">
+                
+                <!-- VLOŽ SI SEM SVOJ ACCESS KEY Z WEB3FORMS -->
+                <input type="hidden" name="apikey" value="b98b93ab-8cf2-4536-b6f0-fd58e53c16c4">
+                
+                <!-- Predmet e-mailu, ktorý ti príde -->
+                <input type="hidden" name="subject" value="Nová správa z kontaktnej stránky!">
+
+                <div class="form-group">
+                    <label for="name">Vaše meno</label>
+                    <input type="text" id="name" name="Meno" required placeholder="Zadajte vaše meno">
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mailová adresa</label>
+                    <input type="email" id="email" name="Email" required placeholder="vas.email@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="service">Vyberte službu</label>
+                    <select id="service" name="Sluzba">
+                        <option value="doučovanie">Doučovanie</option>
+                        <option value="konverzačné kurzy">Konverzačné kurzy</option>
+                        <option value="preklady">Preklady</option>
+                        <option value="tlmočenie">Tlmočenie</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Správa</label>
+                    <textarea id="message" name="Sprava" required placeholder="Napíšte mi bližšie informácie o vašich požiadavkách..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Odoslať správu</button>
+            </form>
+
+            <!-- Úspešná hláška po odoslaní (skrytá kým sa neodosle) -->
+            <div class="contact-form" id="form-success">
+                <div style="font-size: 3rem; color: #0d9488; margin-bottom: 1rem;">✓</div>
+                <h3>Správa bola úspešne odoslaná!</h3>
+                <p>Ďakujem za váš záujem. Ozvem sa vám hneď, ako to bude možné.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Skript na elegantné prepnutie formulára na úspešnú hlášku po odoslaní
+        const contactForm = document.getElementById('contact-form');
+        const successBox = document.getElementById('form-success');
+
+        contactForm.addEventListener('submit', function(e) {
+            // Počkám pol sekundy a prepnem zobrazenie
+            setTimeout(() => {
+                contactForm.style.display = 'none';
+                successBox.style.display = 'block';
+            }, 400);
+        });
+    </script>
+</body>
+</html>
