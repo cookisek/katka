@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kontakt | Profesionálna nemčina</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- iOS / Apple Fonty -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -24,17 +23,25 @@
             --primary: #0f172a;
             --accent: #72f4cb;
             --accent-glow: rgba(114, 244, 203, 0.4);
-            --bg-light: #f8fafc;
-            --text-main: #334155;
+            --bg-gradient: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            --text-main: #1e293b;
             --white: #ffffff;
             --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            
+            /* iOS Liquid Glass premenné */
+            --glass-bg: rgba(255, 255, 255, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --glass-shadow: 0 30px 60px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            --glass-blur: blur(20px);
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Plus Jakarta Sans", sans-serif;
             color: var(--text-main);
-            background-color: var(--bg-light);
-            line-height: 1.6;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            line-height: 1.5;
+            min-height: 100vh;
             opacity: 0;
             transform: translateY(10px);
             animation: cinematicFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -52,12 +59,12 @@
             color: inherit;
         }
 
-        /* Navigácia so skleneným efektom */
+        /* Navigácia v iOS Glass štýle */
         header {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -132,35 +139,57 @@
             background: var(--primary);
             color: var(--white) !important;
             padding: 0.6rem 1.4rem;
-            border-radius: 8px;
+            border-radius: 12px;
             transition: var(--transition);
-            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
         }
 
         .btn-nav:hover {
             background: var(--accent);
             color: var(--primary) !important;
-            transform: translateY(-3px) scale(1.03);
+            transform: translateY(-2px) scale(1.02);
             box-shadow: 0 8px 20px var(--accent-glow);
+        }
+
+        /* Hamburger tlačidlo pre mobily */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 2px;
+            transition: var(--transition);
         }
 
         /* Kontakt sekcia */
         .contact-section {
             max-width: 1150px;
             margin: 0 auto;
-            padding: 6rem 2rem;
+            padding: 5rem 2rem;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 3.5rem;
         }
 
         .section-title h1 {
-            font-size: 3rem;
+            font-size: 2.8rem;
             color: var(--primary);
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             letter-spacing: -1px;
+            font-weight: 700;
         }
 
         .section-title h1 span {
@@ -169,30 +198,34 @@
 
         .section-title p {
             color: #64748b;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
         }
 
-        /* Grid pre kontaktné info a formulár vedľa seba */
+        /* Grid pre karty vedľa seba */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1.5fr;
-            gap: 3rem;
+            gap: 2.5rem;
             align-items: flex-start;
         }
 
-        /* Kontajner s kontaktnými údajmi */
-        .contact-info {
-            background: var(--white);
+        /* LIQUID GLASS KARTA */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: 24px;
             padding: 2.5rem;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.05);
+            transition: var(--transition);
         }
 
         .contact-info h3 {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             color: var(--primary);
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
         }
 
         .contact-info p {
@@ -213,16 +246,18 @@
         }
 
         .contact-icon {
-            background: #f1f5f9;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.9);
             color: #0d9488;
-            width: 45px;
-            height: 45px;
-            border-radius: 10px;
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.2rem;
             flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
             transition: var(--transition);
         }
 
@@ -236,7 +271,7 @@
             display: block;
             font-size: 0.85rem;
             color: #64748b;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.1rem;
         }
 
         .contact-details a, .contact-details p {
@@ -244,43 +279,38 @@
             color: var(--primary);
             font-size: 1.05rem;
             transition: var(--transition);
+            margin-bottom: 0;
         }
 
         .contact-details a:hover {
             color: #0d9488;
         }
 
-        /* Formulár */
-        .contact-form {
-            background: var(--white);
-            padding: 3rem;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.05);
-        }
-
+        /* Formulár prvky */
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.4rem;
         }
 
         .form-group label {
             display: block;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             color: var(--primary);
+            font-size: 0.9rem;
         }
 
         .form-group input,
         .form-group textarea,
         .form-group select {
             width: 100%;
-            padding: 0.9rem;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            padding: 0.9rem 1rem;
+            border: 1px solid rgba(203, 213, 225, 0.8);
+            border-radius: 12px;
+            font-family: inherit;
             font-size: 1rem;
             color: var(--text-main);
-            background: var(--bg-light);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
             transition: var(--transition);
         }
 
@@ -290,12 +320,12 @@
             outline: none;
             border-color: #0d9488;
             background: var(--white);
-            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+            box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.15);
         }
 
         .form-group textarea {
             resize: vertical;
-            height: 150px;
+            height: 140px;
         }
 
         .btn-submit {
@@ -303,26 +333,25 @@
             color: var(--primary);
             padding: 1rem;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-weight: 700;
             font-size: 1rem;
             width: 100%;
             cursor: pointer;
             transition: var(--transition);
-            box-shadow: 0 4px 14px var(--accent-glow);
+            box-shadow: 0 4px 15px var(--accent-glow);
         }
 
         .btn-submit:hover {
             background: #5eead4;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px var(--accent-glow);
+            box-shadow: 0 8px 22px var(--accent-glow);
         }
 
-        /* Správa po úspešnom odoslaní */
         #form-success {
             display: none;
             text-align: center;
-            padding: 2rem 0;
+            padding: 3rem 1rem;
         }
 
         #form-success h3 {
@@ -335,19 +364,47 @@
             color: #64748b;
         }
 
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+        /* RESPONSÍVNE PRAVIDLÁ PRE MOBILY */
+        @media (max-width: 850px) {
+            .hamburger {
+                display: flex;
             }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: var(--glass-blur);
+                -webkit-backdrop-filter: var(--glass-blur);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                gap: 1.5rem;
+                border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+                box-shadow: 0 20px 30px rgba(0,0,0,0.05);
+                transform: translateY(-150%);
+                opacity: 0;
+                pointer-events: none;
+                transition: var(--transition);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+
             .contact-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
-            .contact-form, .contact-info {
-                padding: 1.5rem;
+            .glass-card {
+                padding: 1.8rem;
             }
             .section-title h1 {
-                font-size: 2.3rem;
+                font-size: 2.2rem;
             }
         }
     </style>
@@ -357,8 +414,16 @@
     <header>
         <div class="nav-container">
             <a href="index.html" class="logo">Katarína Pischel<span>.</span></a>
+            
+            <!-- Hamburger tlačidlo -->
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <div class="nav-right">
-                <nav class="nav-links">
+                <nav class="nav-links" id="nav-links">
                     <a href="index.html">Domov</a>
                     <a href="index.html#sluzby">Služby</a>
                     <a href="o-mne.html">O mne</a>
@@ -376,8 +441,8 @@
         </div>
 
         <div class="contact-grid">
-            <!-- Kontaktné informácie na boku -->
-            <div class="contact-info">
+            <!-- Kontaktné informácie -->
+            <div class="glass-card contact-info">
                 <h3>Kontaktné údaje</h3>
                 <p>Neváhajte ma kontaktovať telefonicky, e-mailom alebo prostredníctvom kontaktného formulára.</p>
                 
@@ -398,13 +463,9 @@
                 </div>
             </div>
 
-            <!-- Formulár prepojený s Web3Forms -->
-            <form action="https://api.web3forms.com/submit" method="POST" class="contact-form" id="contact-form">
-                
-                <!-- VLOŽ SI SEM SVOJ ACCESS KEY Z WEB3FORMS -->
-                <input type="hidden" name="apikey" value="b98b93ab-8cf2-4536-b6f0-fd58e53c16c4">
-                
-                <!-- Predmet e-mailu, ktorý ti príde -->
+            <!-- Formulár -->
+            <form action="https://api.web3forms.com/submit" method="POST" class="glass-card contact-form" id="contact-form">
+                <input type="hidden" name="apikey" value="TVOJ_ACCESS_KEY_TU">
                 <input type="hidden" name="subject" value="Nová správa z kontaktnej stránky!">
 
                 <div class="form-group">
@@ -431,8 +492,8 @@
                 <button type="submit" class="btn-submit">Odoslať správu</button>
             </form>
 
-            <!-- Úspešná hláška po odoslaní (skrytá kým sa neodosle) -->
-            <div class="contact-form" id="form-success">
+            <!-- Úspešná hláška -->
+            <div class="glass-card contact-form" id="form-success">
                 <div style="font-size: 3rem; color: #0d9488; margin-bottom: 1rem;">✓</div>
                 <h3>Správa bola úspešne odoslaná!</h3>
                 <p>Ďakujem za váš záujem. Ozvem sa vám hneď, ako to bude možné.</p>
@@ -441,12 +502,26 @@
     </section>
 
     <script>
-        // Skript na elegantné prepnutie formulára na úspešnú hlášku po odoslaní
+        /* Mobilné hamburger menu */
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Zatvorenie menu po kliknutí na odkaz
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        /* Formulár */
         const contactForm = document.getElementById('contact-form');
         const successBox = document.getElementById('form-success');
 
         contactForm.addEventListener('submit', function(e) {
-            // Počkám pol sekundy a prepnem zobrazenie
             setTimeout(() => {
                 contactForm.style.display = 'none';
                 successBox.style.display = 'block';
