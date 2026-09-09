@@ -600,7 +600,8 @@
         </div>
     </section>
 
-<script>
+
+    <script>
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('nav-links');
 
@@ -608,17 +609,14 @@
             navLinks.classList.toggle('active');
         });
 
-        // Automatické zatvorenie menu po kliknutí na hociktorý odkaz
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
             });
         });
-    </script>
 
-    <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const cards = document.querySelectorAll(".service-card");
+            const cards = document.querySelectorAll(".pricing-card");
             
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
@@ -631,7 +629,6 @@
 
             cards.forEach(card => observer.observe(card));
         });
-        
     </script>
 </body>
 </html>

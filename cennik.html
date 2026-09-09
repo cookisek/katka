@@ -308,10 +308,10 @@
             transition: var(--transition);
         }
 
-        /* Pravidlá pre mobilné obrazovky */
+        /* Pravidlá pre mobilné obrazovky (funkčné vysúvacie menu) */
         @media (max-width: 768px) {
             .hamburger {
-                display: flex;
+                display: flex !important;
             }
 
             .nav-links {
@@ -335,9 +335,16 @@
             }
 
             .nav-links.active {
-                transform: translateY(0);
-                opacity: 1;
-                pointer-events: auto;
+                transform: translateY(0) !important;
+                opacity: 1 !important;
+                pointer-events: auto !important;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            .section-title h1 {
+                font-size: 2.3rem;
             }
         }
 
@@ -360,25 +367,11 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 20px var(--accent-glow);
         }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-            .section-title h1 {
-                font-size: 2.3rem;
-            }
-        }
     </style>
 </head>
 <body>
 
-    <div id="domov"></div>
-
-   <header>
+    <header>
         <div class="nav-container">
             <a href="index.html" class="logo">Katarína Pischel<span>.</span></a>
             
@@ -394,8 +387,8 @@
                     <a href="index.html">Domov</a>
                     <a href="index.html#sluzby">Služby</a>
                     <a href="o-mne.html">O mne</a>
-                    <a href="cennik.html">Cenník</a>
-                    <a href="kontakt.html" class="btn-nav active">Kontakt</a>
+                    <a href="cennik.html" style="color: #0d9488;">Cenník</a>
+                    <a href="kontakt.html" class="btn-nav">Kontakt</a>
                 </nav>
             </div>
         </div>
@@ -404,63 +397,64 @@
     <section class="pricing-section">
         <div class="section-title">
             <h1>Transparentný <span>cenník</span></h1>
-            <p>Vyberte si službu, ktorá najviac vyhovuje vašim jazykovým cieľom</p>
+            <p>Vyberte si službu, ktorá najlepšie vyhovuje vašim jazykovým cieľom</p>
         </div>
+
         <div class="pricing-grid">
             <div class="pricing-card">
                 <div class="card-content-top">
                     <h3>Doučovanie</h3>
-                    <div class="price">18 € <span>/ 60 min</span></div>
-                    <p>Individuálne lekcie prispôsobené vašim potrebám, gramatika a príprava na skúšky.</p>
+                    <div class="price">20 € <span>/ 60 min</span></div>
+                    <p>Individuálna príprava na mieru, gramatika a študijné materiály v cene.</p>
                     <ul>
-                        <li>Pre začiatočníkov aj pokročilých</li>
-                        <li>Online alebo prezenčne</li>
-                        <li>Všetky materiály v cene</li>
+                        <li>Základná a stredná škola</li>
+                        <li>Príprava na maturitu</li>
+                        <li>Gramatika od základu</li>
                     </ul>
                 </div>
-                <a href="kontakt.html" class="btn-primary">Objednať hodinu</a>
+                <a href="kontakt.html" class="btn-primary">Objednať</a>
             </div>
 
             <div class="pricing-card">
                 <div class="card-content-top">
-                    <h3>Konverzačné kurzy</h3>
-                    <div class="price">20 € <span>/ 60 min</span></div>
-                    <p>Intenzívne rozprávanie zamerané na odbúranie strachu a plynulosť v reálnych situáciách.</p>
+                    <h3>Konverzácie</h3>
+                    <div class="price">22 € <span>/ 60 min</span></div>
+                    <p>Intenzívne rozprávanie na odbúranie strachu z cudzieho jazyka.</p>
                     <ul>
-                        <li>Reálne životné témy</li>
-                        <li>Okamžitá korekcia výslovnosti</li>
-                        <li>Uvoľnená atmosféra</li>
+                        <li>Reálne životné situácie</li>
+                        <li>Okamžitá korekcia</li>
+                        <li>Príjemná atmosféra</li>
                     </ul>
                 </div>
-                <a href="kontakt.html" class="btn-primary">Začať konverzovať</a>
+                <a href="kontakt.html" class="btn-primary">Objednať</a>
             </div>
 
             <div class="pricing-card">
                 <div class="card-content-top">
                     <h3>Preklady</h3>
                     <div class="price">15 € <span>/ normostrana</span></div>
-                    <p>Presné a štýlovo čisté preklady dokumentácie, zmlúv, korešpondencie a textov.</p>
+                    <p>Presné preklady dokumentov, mailov a textov pre osobné účely.</p>
                     <ul>
-                        <li>Všeobecná a obchodná nemčina</li>
-                        <li>Rýchle dodacie lehoty</li>
-                        <li>Diskrétnosť a profesionalita</li>
+                        <li>Všeobecná nemčina</li>
+                        <li>Rýchle dodanie</li>
+                        <li>Kvalitná štylistika</li>
                     </ul>
                 </div>
-                <a href="kontakt.html" class="btn-primary">Dohodnúť preklad</a>
+                <a href="kontakt.html" class="btn-primary">Objednať</a>
             </div>
 
             <div class="pricing-card">
                 <div class="card-content-top">
                     <h3>Tlmočenie</h3>
                     <div class="price">30 € <span>/ hodina</span></div>
-                    <p>Profesionálne sprevádzanie a tlmočenie pre firmy a jednotlivcov pri rokovaniach či eventoch.</p>
+                    <p>Osobné alebo online sprevádzanie a tlmočenie pre firmy a klientov.</p>
                     <ul>
-                        <li>Obchodné rokovania a schôdzky</li>
-                        <li>Sprievod pre klientov</li>
+                        <li>Obchodné stretnutia</li>
                         <li>Spoľahlivosť</li>
+                        <li>Diskrétnosť</li>
                     </ul>
                 </div>
-                <a href="kontakt.html" class="btn-primary">Dohodnúť tlmočenie</a>
+                <a href="kontakt.html" class="btn-primary">Objednať</a>
             </div>
         </div>
     </section>
@@ -473,15 +467,12 @@
             navLinks.classList.toggle('active');
         });
 
-        // Automatické zatvorenie menu po kliknutí na hociktorý odkaz
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
             });
         });
-    </script>
 
-    <script>
         document.addEventListener("DOMContentLoaded", function() {
             const cards = document.querySelectorAll(".pricing-card");
             
