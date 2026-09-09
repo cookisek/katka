@@ -475,9 +475,6 @@
         }
 
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
             .hero {
                 grid-template-columns: 1fr;
                 padding: 3rem 1rem;
@@ -503,7 +500,7 @@
 
     <div id="domov"></div>
 
-   <header>
+    <header>
         <div class="nav-container">
             <a href="index.html" class="logo">Katarína Pischel<span>.</span></a>
             
@@ -520,7 +517,7 @@
                     <a href="index.html#sluzby">Služby</a>
                     <a href="o-mne.html">O mne</a>
                     <a href="cennik.html">Cenník</a>
-                    <a href="kontakt.html" class="btn-nav active">Kontakt</a>
+                    <a href="kontakt.html" class="btn-nav">Kontakt</a>
                 </nav>
             </div>
         </div>
@@ -592,14 +589,13 @@
                     <ul>
                         <li>Obchodné rokovania a schôdzky</li>
                         <li>Sprievod pre klientov</li>
-                        <li>Spoľahlivosť a diskrétność</li>
+                        <li>Spoľahlivosť a diskrétnosť</li>
                     </ul>
                 </div>
                 <a href="kontakt.html" class="btn-secondary card-btn">Dohodnúť tlmočenie</a>
             </div>
         </div>
     </section>
-
 
     <script>
         const hamburger = document.getElementById('hamburger');
@@ -616,7 +612,7 @@
         });
 
         document.addEventListener("DOMContentLoaded", function() {
-            const cards = document.querySelectorAll(".pricing-card");
+            const cards = document.querySelectorAll(".service-card");
             
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
